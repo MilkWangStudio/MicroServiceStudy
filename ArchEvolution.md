@@ -29,14 +29,14 @@ Response:
     <VideoComponent data={{Video}}/>
 </div>
 ```
-![模板引擎页面渲染流程](http://assets.processon.com/chart_image/6350ee72637689070a62b942.png)
+![模板引擎页面渲染流程1](http://assets.processon.com/chart_image/6350ee72637689070a62b942.png)
 
 
 小徐开发的很开心，有什么功能先后端在一个项目里，一梭子就搞完了。后来小徐招了一个前端来帮他分担工作。这位前端小伙伴只会写JS，不会Java。没法改Java项目里的模板页面。    
 
 经过沟通后他们决定前端小伙先写静态页面，写完之后把代码发给小徐，然后小徐把页面代码改成JSP模板引擎的语法。  
 
-![模板引擎工作方式](http://assets.processon.com/chart_image/6350e5c07d9c080747604468.png)  
+![模板引擎工作方式1](http://assets.processon.com/chart_image/6350e5c07d9c080747604468.png)  
 
 两个人开发迭代果然快很多，网站用户变多了，又开始扩充团队。这时候小徐开始忙不过来了，前端想改个颜色都得让小徐重新发布后端项目。小徐总结了下这种视图层和接口层混在一起的方案有这么几个问题：
 - 前后端职责不清晰，比如一些条件渲染、循环渲染，是js写还是java写？
@@ -46,7 +46,7 @@ Response:
 
 这时候开始尝试把前端项目单独部署，小徐在线上给前端团队开了一台服务器，页面请求会被路由到这台服务器上，浏览器打开后再通过HTTP请求查询后台服务。整个请求的链路大概是这样的：  
 
-![页面加载流程-前后端分离](http://assets.processon.com/chart_image/6350ec15e401fd06f77292da.png)  
+![页面加载流程-前后端分离1](http://assets.processon.com/chart_image/6350ec15e401fd06f77292da.png)  
 
 改造后前端团队效率高了很多，带来了这些好处：  
 - 前端可以自己修改页面逻辑、发版
