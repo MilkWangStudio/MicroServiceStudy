@@ -50,6 +50,8 @@ SpringCloudAlibaba通过Nacos进行服务注册发现，提供了Spring Cloud Al
 详细接入流程可参考[SpringCloudAlibaba-服务注册与发现](https://spring-cloud-alibaba-group.github.io/github-pages/2021/zh-cn/index.html#_spring_cloud_alibaba_nacos_discovery)
 
 #### 通用配置
+SpringBootCloud启动配置非常简单。  
+
 1.配置Maven依赖
 ```maven
 <dependency>
@@ -69,15 +71,15 @@ spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
 # spring-boot-actuator组件的配置，暴露一些API出去，可以查询健康装填，甚至操作服务关闭，具体可选项看考[文档](https://docs.spring.io/spring-boot/docs/2.1.11.RELEASE/reference/html/production-ready-endpoints.html)
 management.endpoints.web.exposure.include=*
 ```
-3.使用@EnableDiscoveryClient注解
 
 启动项目后，即可在Nacos服务列表看到已注册成功。
 ![Nacos-Services](./static/Nacos-Service.jpg)
 
-4.服务调用
+3.服务调用  
+
 这里演示用比较直白的方式来编码调用，后面会讲一下实际项目中用接口方式来声明调用，实际上声明调用只是用代理的方式做了增强处理，本质还是LoadBalance通过服务名选择ip端口，然后发起普通的http调用。  
 
-4.1首先引入LoadBalance实现依赖,因为spring-cloud-starter-alibaba-nacos-discovery中只包含LoadBalance接口。
+3.1首先引入LoadBalance实现依赖,因为spring-cloud-starter-alibaba-nacos-discovery中只包含LoadBalance接口。
 ```maven
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -86,7 +88,7 @@ management.endpoints.web.exposure.include=*
 </dependency>
 ```
 
-4.2通过LoadBalance获取服务实例并发起调用
+3.2通过LoadBalance获取服务实例并发起调用
 ```java
 public List<VideoDTO> queryUserLoveVideos(Integer userId) {
     // 用user-provider获取服务实例
@@ -256,7 +258,7 @@ public class NacosServiceRegistryAutoConfiguration {
         reqApi(UtilAndComs.nacosUrlInstance, params, HttpMethod.POST);
     }
 
-    // 4. 这里只关注nacos集群情况下，他会调哪个server就好
+    // 4. 这里只关注nacos集群情况下，他会调哪个server就好。另外从这里可以看出，在底层调用时没有做重试机制，注册时的重试
       public String reqApi(String api, Map<String, String> params, Map<String, String> body, List<String> servers,
             String method) throws NacosException {
         
